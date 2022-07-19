@@ -1,4 +1,12 @@
 # Maven
+- task: CopyFilesOverSSH@0
+  inputs:
+    sshEndpoint: 'POC-VM'
+    sourceFolder: '$(Agent.BuildDirectory)/'
+    contents: '**/*.war'
+    targetFolder: '/home/microsoft/apache/webapps'
+    readyTimeout: '20000'
+    flattenFolders: true
 # Build your Java project and run tests with Apache Maven.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
