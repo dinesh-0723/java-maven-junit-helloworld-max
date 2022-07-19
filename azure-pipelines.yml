@@ -23,7 +23,7 @@ steps:
   inputs:
     sshEndpoint: 'POC-VM'
     sourceFolder: '$(Agent.BuildDirectory)/'
-    contents: '**/*.war'
+    contents: '**/*.jar'
     targetFolder: '/home/microsoft/apache/webapps'
     readyTimeout: '20000'
     flattenFolders: true
