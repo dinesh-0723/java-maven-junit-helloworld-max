@@ -24,3 +24,13 @@ steps:
     SourceFolder: '$(agent.builddirectory)'
     Contents: '**/*.jar'
     TargetFolder: '$(build.artifactstagingdirectory)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'dineshreg'
+    repository: 'dineshreg'
+    command: 'push'
