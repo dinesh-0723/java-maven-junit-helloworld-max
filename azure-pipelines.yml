@@ -19,19 +19,3 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-- task: CopyFilesOverSSH@0
-  inputs:
-    sshEndpoint: 'POC-VM'
-    sourceFolder: '$(Agent.BuildDirectory)/'
-    contents: '**/*.jar'
-    targetFolder: '/home/microsoft/apache/webapps'
-    readyTimeout: '20000'
-    flattenFolders: true
-- task: SSH@0
-  inputs:
-    sshEndpoint: 'POC-VM'
-    runOptions: 'inline'
-    inline: |
-      /home/microsoft/apache/bin/shutdown.sh
-      /home/microsoft/apache/bin/startup.sh
-    readyTimeout: '20000'
