@@ -19,18 +19,11 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-- task: CopyFiles@2
+- task: CopyFilesOverSSH@0
   inputs:
-    SourceFolder: '$(agent.builddirectory)'
-    Contents: '**/*.jar'
-    TargetFolder: '$(build.artifactstagingdirectory)'
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
-- task: Docker@2
-  inputs:
-    containerRegistry: 'dineshreg'
-    repository: 'dineshreg'
-    command: 'push'
+    sshEndpoint: 'POC-VM'
+    sourceFolder: '$(Agent.BuildDirectory)'
+    contents: '**/*.jar'
+    targetFolder: '/home/microsoft/apache-tomcat/webapps'
+    readyTimeout: '20000'
+    flattenFolders: true
